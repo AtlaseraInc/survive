@@ -182,11 +182,11 @@ Assets/
 
 ## 📄 License
 
-This project is proprietary and owned by **Atlasera, LLC**. All rights reserved.
+This project is proprietary and owned by **Atlasera, Inc**. All rights reserved.
 
 ---
 
 ## 👨‍💻 Developed By
 
-**Atlasera, LLC**
-[github.com/AtlaseraLLC](https://github.com/AtlaseraLLC)
+**Atlasera, Inc**
+[github.com/AtlaseraInc](https://github.com/AtlaseraInc)
