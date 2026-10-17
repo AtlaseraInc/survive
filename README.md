@@ -137,7 +137,7 @@ Assets/
 | Scene | Description |
 |-------|-------------|
 | `MainMenu` | Title screen with settings and credits |
-| `GameScene` | Main gameplay — the post-apocalyptic street |
+| `GameScene` | Main gameplay; the post-apocalyptic street |
 | `GameOver` | Death screen with stats and retry option |
 | `LoadingScreen` | Async loading screen with survival tips |
 
