@@ -20,7 +20,7 @@
 - Navigate through a procedurally generated post-apocalyptic street
 - Fight off waves of zombies using melee and ranged combat
 - Rescue 4 missing friends hidden throughout the world
-- Survive as long as possible — every second counts
+- Survive as long as possible; every second counts
 
 ---
 
