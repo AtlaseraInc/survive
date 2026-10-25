@@ -15,7 +15,7 @@
 
 ---
 
-## 🕹️ Gameplay
+## Gameplay
 
 - Navigate through a procedurally generated post-apocalyptic street
 - Fight off waves of zombies using melee and ranged combat
