@@ -24,7 +24,7 @@
 
 ---
 
-## ✨ Features
+## Features
 
 - Smooth horizontal side-scrolling with multi-layer parallax background
 - Melee and ranged combat system
