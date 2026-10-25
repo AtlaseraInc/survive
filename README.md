@@ -9,7 +9,7 @@
 
 ---
 
-## 🎮 About
+## About
 
 **Survive** is a 2D horizontal side-scrolling game set in a post-apocalyptic world. The player must navigate through a long, devastated street, fending off relentless waves of zombies in a desperate search to rescue their missing friends before it's too late.
 
