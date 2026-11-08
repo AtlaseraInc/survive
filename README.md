@@ -132,7 +132,7 @@ Assets/
 
 ---
 
-## 🗺️ Scenes
+## Scenes
 
 | Scene | Description |
 |-------|-------------|
