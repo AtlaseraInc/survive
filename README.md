@@ -95,7 +95,7 @@ Assets/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Unity Hub installed
