@@ -162,7 +162,7 @@ Assets/
 
 ---
 
-## 🛣️ Roadmap
+## Roadmap
 
 - [x] Player movement and combat
 - [x] Zombie AI and wave spawning
