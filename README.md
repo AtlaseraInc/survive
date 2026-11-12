@@ -37,7 +37,7 @@
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 Assets/
