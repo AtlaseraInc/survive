@@ -86,7 +86,7 @@ Assets/
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 - [Unity 6](https://unity.com/) `6000.0f1`
 - C# / .NET
