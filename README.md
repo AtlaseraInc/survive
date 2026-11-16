@@ -151,7 +151,7 @@ Assets/
 
 ---
 
-## 👥 Friends to Rescue
+## Friends to Rescue
 
 | Name | Location |
 |------|---------|
