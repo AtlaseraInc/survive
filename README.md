@@ -121,7 +121,7 @@ Assets/
 
 ---
 
-## 🎯 Controls
+## Controls
 
 | Action | Key |
 |--------|-----|
