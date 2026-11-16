@@ -1,4 +1,4 @@
-# 🧟 Survive
+# Survive
 
 > A 2D post-apocalyptic side-scrolling survival game built with Unity and C#.
 
@@ -180,13 +180,6 @@ Assets/
 
 ---
 
-## 📄 License
+## License
 
 This project is proprietary and owned by **Atlasera, Inc**. All rights reserved.
-
----
-
-## 👨‍💻 Developed By
-
-**Atlasera, Inc**
-[github.com/AtlaseraInc](https://github.com/AtlaseraInc)
