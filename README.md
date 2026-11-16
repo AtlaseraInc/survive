@@ -143,7 +143,7 @@ Assets/
 
 ---
 
-## 🧟 Enemies
+## Enemies
 
 | Enemy | Health | Speed | Damage |
 |-------|--------|-------|--------|
