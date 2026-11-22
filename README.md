@@ -172,7 +172,6 @@ Assets/
 - [x] Main Menu, Game Over, Loading Screen
 - [ ] Sprite art and animations
 - [ ] Audio — music and SFX
-- [ ] Additional enemy types
 - [ ] Weapon pickups
 - [ ] ScriptableObject-based enemy data
 - [ ] Mobile controls
