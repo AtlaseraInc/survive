@@ -1,8 +1,4 @@
-using System;
-using System.Numerics;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 public class ZombieController : MonoBehaviour
 {
@@ -16,59 +12,53 @@ public class ZombieController : MonoBehaviour
     private Transform player;
     private float attackTimer = 0f;
     private Animator animator;
+    private ZombieHealth health;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player")?.transform;
         animator = GetComponent<Animator>();
-        groanTimer = Random.Range(3f, 8f);
+        health = GetComponent<ZombieHealth>();
     }
 
     void Update()
     {
+        if (health != null && health.IsDead) return;
         if (player == null) return;
 
         float dist = Vector2.Distance(transform.position, player.position);
         attackTimer -= Time.deltaTime;
 
         if (dist <= attackRange)
-        {
             Attack();
-        }
         else if (dist <= detectionRange)
-        {
             Chase();
-        }
         else
-        {
             Idle();
-        }
-        groanTimer -= Time.deltaTime;
-        if (groanTimer <= 0f)
-        {
-            AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.zombieGroan, 0.6f);
-            groanTimer = Random.Range(4f, 10f);
-        }
     }
 
     void Chase()
     {
-        animator.SetBool("IsWalking", true);
-        Vector2 dir = (player.position - transform.position).normalized;
-        transform.Translate(dir * moveSpeed * Time.deltaTime);
+        if (animator) animator.SetBool("IsWalking", true);
 
-        // Flip to face player
+        // Horizontal only, so zombies stay on the ground
+        float dirX = Mathf.Sign(player.position.x - transform.position.x);
+        transform.Translate(Vector2.right * dirX * moveSpeed * Time.deltaTime);
+
+        // Flip to face the player
         transform.localScale = new Vector3(
-        dir.x < 0 ? -Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x),
-            transform.localScale.y, transform.localScale.z);
+            dirX < 0 ? -Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x),
+            transform.localScale.y,
+            transform.localScale.z);
     }
 
     void Attack()
     {
-        animator.SetBool("IsWalking", false);
+        if (animator) animator.SetBool("IsWalking", false);
+
         if (attackTimer <= 0f)
         {
-            animator.SetTrigger("Attack");
+            if (animator) animator.SetTrigger("Attack");
             player.GetComponent<PlayerHealth>()?.TakeDamage(attackDamage);
             attackTimer = attackCooldown;
             AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.zombieAttack);
@@ -77,6 +67,6 @@ public class ZombieController : MonoBehaviour
 
     void Idle()
     {
-        animator.SetBool("IsWalking", false);
+        if (animator) animator.SetBool("IsWalking", false);
     }
 }

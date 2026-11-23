@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -19,6 +20,9 @@ public class HUDManager : MonoBehaviour
     [Header("Ammo")]
     public TextMeshProUGUI ammoText;
 
+    [Header("Waves")]
+    public TextMeshProUGUI waveText;
+
     [Header("Notifications")]
 
     [Header("Waves")]
@@ -35,10 +39,13 @@ public class HUDManager : MonoBehaviour
 
     void Start()
     {
-        // Hook into player health events
+        // Hook into player health events and show the starting value
         playerHealth = FindAnyObjectByType<PlayerHealth>();
         if (playerHealth != null)
+        {
             playerHealth.OnHealthChanged += UpdateHealth;
+            UpdateHealth(playerHealth.currentHealth, playerHealth.maxHealth);
+        }
 
         // Hook into game manager events
         if (GameManager.Instance != null)
@@ -46,6 +53,7 @@ public class HUDManager : MonoBehaviour
 
         // Initialize UI
         UpdateFriends(0);
+        UpdateWave(0);
         HideNotification();
     }
 
@@ -69,8 +77,10 @@ public class HUDManager : MonoBehaviour
 
     void UpdateFriends(int count)
     {
-        if (friendsText)
-            friendsText.text = $"Friends: {count} / {GameManager.Instance.totalFriends}";
+        if (!friendsText) return;
+
+        int total = GameManager.Instance != null ? GameManager.Instance.totalFriends : 4;
+        friendsText.text = $"Friends: {count} / {total}";
     }
 
     // ── Timer ────────────────────────────────────────────
@@ -96,23 +106,27 @@ public class HUDManager : MonoBehaviour
             ammoText.text = $"{current} / {max}";
     }
 
+    // ── Waves ────────────────────────────────────────────
+
     public void UpdateWave(int wave)
     {
         if (waveText)
-            waveText.text = $"Wave {wave}";
+            waveText.text = wave > 0 ? $"Wave {wave}" : "";
     }
 
     // ── Notifications ────────────────────────────────────
 
     public void ShowNotification(string message, float duration = 2.5f)
     {
+        if (!notificationText) return;
+
         if (notificationCoroutine != null)
             StopCoroutine(notificationCoroutine);
 
         notificationCoroutine = StartCoroutine(DisplayNotification(message, duration));
     }
 
-    System.Collections.IEnumerator DisplayNotification(string message, float duration)
+    IEnumerator DisplayNotification(string message, float duration)
     {
         notificationText.text = message;
         notificationText.gameObject.SetActive(true);
