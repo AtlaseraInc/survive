@@ -39,6 +39,7 @@ public class PlayerCombat : MonoBehaviour
     void MeleeAttack()
     {
         animator.SetTrigger("Attack");
+        AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.meleeSwing);
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (var hit in hits)
             hit.GetComponent<ZombieHealth>()?.TakeDamage(attackDamage);
@@ -47,6 +48,7 @@ public class PlayerCombat : MonoBehaviour
     void RangedAttack()
     {
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.shoot);
     }
 
     void OnDrawGizmosSelected()

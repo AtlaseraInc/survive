@@ -63,14 +63,14 @@ public class MainMenu : MonoBehaviour
     // ── Settings ─────────────────────────────────────────
 
     public void OnMusicVolumeChanged(float value)
-    {
-        PlayerPrefs.SetFloat("MusicVolume", value);
-        // TODO: hook into AudioManager
-    }
+{
+    PlayerPrefs.SetFloat("MusicVolume", value);
+    AudioManager.Instance?.SetMusicVolume(value);
+}
 
-    public void OnSFXVolumeChanged(float value)
-    {
-        PlayerPrefs.SetFloat("SFXVolume", value);
-        // TODO: hook into AudioManager
-    }
+public void OnSFXVolumeChanged(float value)
+{
+    PlayerPrefs.SetFloat("SFXVolume", value);
+    AudioManager.Instance?.SetSFXVolume(value);
+}
 }

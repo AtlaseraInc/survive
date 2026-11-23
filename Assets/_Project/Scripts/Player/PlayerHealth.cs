@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.playerHurt);
         currentHealth = Mathf.Max(0, currentHealth - amount);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 

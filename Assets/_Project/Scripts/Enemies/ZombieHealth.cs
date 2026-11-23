@@ -20,7 +20,7 @@ public class ZombieHealth : MonoBehaviour
 
     void Die()
     {
-        // TODO: play death animation before destroying
+        AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.zombieDeath);
         Destroy(gameObject);
     }
 }
