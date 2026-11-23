@@ -20,9 +20,11 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI ammoText;
 
     [Header("Notifications")]
+
+    [Header("Waves")]
+    public TextMeshProUGUI waveText;
     public TextMeshProUGUI notificationText;
     private Coroutine notificationCoroutine;
-
     private PlayerHealth playerHealth;
 
     void Awake()
@@ -92,6 +94,12 @@ public class HUDManager : MonoBehaviour
     {
         if (ammoText)
             ammoText.text = $"{current} / {max}";
+    }
+
+    public void UpdateWave(int wave)
+    {
+        if (waveText)
+            waveText.text = $"Wave {wave}";
     }
 
     // ── Notifications ────────────────────────────────────
