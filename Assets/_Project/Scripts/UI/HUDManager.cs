@@ -24,9 +24,11 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI waveText;
 
     [Header("Notifications")]
+
+    [Header("Waves")]
+    public TextMeshProUGUI waveText;
     public TextMeshProUGUI notificationText;
     private Coroutine notificationCoroutine;
-
     private PlayerHealth playerHealth;
 
     void Awake()

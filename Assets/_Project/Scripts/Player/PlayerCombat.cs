@@ -57,6 +57,7 @@ public class PlayerCombat : MonoBehaviour
     {
         // AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.shoot); // enable after merging feature/audio
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.shoot);
     }
 
     void OnDrawGizmosSelected()

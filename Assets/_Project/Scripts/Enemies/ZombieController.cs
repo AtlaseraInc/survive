@@ -7,6 +7,7 @@ public class ZombieController : MonoBehaviour
     public float attackRange = 0.6f;
     public int attackDamage = 10;
     public float attackCooldown = 1.2f;
+    private float groanTimer;
 
     private Transform player;
     private float attackTimer = 0f;
@@ -60,6 +61,7 @@ public class ZombieController : MonoBehaviour
             if (animator) animator.SetTrigger("Attack");
             player.GetComponent<PlayerHealth>()?.TakeDamage(attackDamage);
             attackTimer = attackCooldown;
+            AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.zombieAttack);
         }
     }
 
