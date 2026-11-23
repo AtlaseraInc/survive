@@ -69,6 +69,7 @@ public class WaveManager : MonoBehaviour
             OnWaveStarted?.Invoke(CurrentWave);
             HUDManager.Instance?.UpdateWave(CurrentWave);
             HUDManager.Instance?.ShowNotification($"Wave {CurrentWave}");
+            AudioManager.Instance?.PlaySFX(AudioManager.Instance.waveStart);
 
             // Spawn the wave
             while (spawnedThisWave < waveTarget)

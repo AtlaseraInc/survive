@@ -24,9 +24,7 @@ public class ZombieHealth : MonoBehaviour
 
     void Die()
     {
-        isDead = true;
-        OnZombieDied?.Invoke(this);
-        // TODO: play death animation before destroying
+        AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.zombieDeath);
         Destroy(gameObject);
     }
 }
