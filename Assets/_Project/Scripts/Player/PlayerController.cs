@@ -1,8 +1,4 @@
-using System;
-using System.Numerics;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -14,57 +10,70 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Check")]
     public Transform groundCheck;
     public LayerMask groundLayer;
+    public float groundCheckRadius = 0.1f;
+
     private bool isGrounded;
+    private bool facingRight = true;
 
     private Rigidbody2D rb;
     private Animator animator;
-    private bool facingRight = true;
+    private PlayerHealth health;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        health = GetComponent<PlayerHealth>();
     }
 
     void Update()
     {
-        HandleMovement();
+        // Stop horizontal movement once dead, but let gravity keep working
+        if (health != null && health.IsDead)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            if (animator) animator.SetFloat("Speed", 0f);
+            return;
+        }
+
+        float h = Input.GetAxisRaw("Horizontal");
+
+        HandleMovement(h);
         HandleJump();
-        HandleFlip();
+        HandleFlip(h);
     }
 
     // Handle horizontal movement and update animator
     void HandleMovement()
     {
-        float h = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
-        animator.SetFloat("Speed", Mathf.Abs(h));
+        if (animator) animator.SetFloat("Speed", Mathf.Abs(h));
     }
 
     // Handle jumping and ground check
     void HandleJump()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            animator.SetTrigger("Jump");
+            if (animator) animator.SetTrigger("Jump");
+            // AudioManager.Instance?.PlaySFX(AudioManager.Instance.jump); // enable after merging feature/audio
         }
 
-        animator.SetBool("IsGrounded", isGrounded);
+        if (animator) animator.SetBool("IsGrounded", isGrounded);
     }
 
     // Flip the player sprite based on movement direction
     void HandleFlip()
     {
-        float h = Input.GetAxisRaw("Horizontal");
         if ((h > 0 && !facingRight) || (h < 0 && facingRight))
         {
             facingRight = !facingRight;
-            transform.localScale = new Vector3(-transform.localScale.x,
-                                               transform.localScale.y,
-                                               transform.localScale.z);
+            Vector3 scale = transform.localScale;
+            scale.x *= -1f;
+            transform.localScale = scale;
         }
     }
 }

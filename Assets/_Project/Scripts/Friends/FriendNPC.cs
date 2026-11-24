@@ -38,6 +38,7 @@ public class FriendNPC : MonoBehaviour
         // Play rescue effect if assigned
         if (rescueEffect)
             Instantiate(rescueEffect, transform.position, Quaternion.identity);
+            AudioManager.Instance?.PlaySFX(AudioManager.Instance.friendRescued);
 
         // Play animation if available
         if (animator)

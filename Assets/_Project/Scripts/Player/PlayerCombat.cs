@@ -1,5 +1,4 @@
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -16,11 +15,19 @@ public class PlayerCombat : MonoBehaviour
 
     private float cooldownTimer = 0f;
     private Animator animator;
+    private PlayerHealth health;
 
-    void Start() => animator = GetComponent<Animator>();
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        health = GetComponent<PlayerHealth>();
+    }
 
     void Update()
     {
+        // No combat once the player is dead
+        if (health != null && health.IsDead) return;
+
         cooldownTimer -= Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1") && cooldownTimer <= 0f)
@@ -38,7 +45,9 @@ public class PlayerCombat : MonoBehaviour
 
     void MeleeAttack()
     {
-        animator.SetTrigger("Attack");
+        if (animator) animator.SetTrigger("Attack");
+        // AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.meleeSwing); // enable after merging feature/audio
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (var hit in hits)
             hit.GetComponent<ZombieHealth>()?.TakeDamage(attackDamage);
@@ -46,7 +55,9 @@ public class PlayerCombat : MonoBehaviour
 
     void RangedAttack()
     {
+        // AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.shoot); // enable after merging feature/audio
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        AudioManager.Instance?.PlayRandomSFX(AudioManager.Instance.shoot);
     }
 
     void OnDrawGizmosSelected()
