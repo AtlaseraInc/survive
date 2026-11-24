@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         HandleFlip();
     }
 
+    // Handle horizontal movement and update animator
     void HandleMovement()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(h));
     }
 
+    // Handle jumping and ground check
     void HandleJump()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
     }
 
+    // Flip the player sprite based on movement direction
     void HandleFlip()
     {
         float h = Input.GetAxisRaw("Horizontal");
